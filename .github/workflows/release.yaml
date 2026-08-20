@@ -57,18 +57,16 @@ jobs:
   flatpak:
     name: Build Flatpak Bundle
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/flathub-infra/flatpak-builder-lint:latest
-      options: --privileged
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Build Flatpak Bundle
-        run: |
-          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          flatpak-builder --install-deps-from=flathub --repo=repo --force-clean build-dir com.mgame.Solo.yml
-          flatpak build-bundle repo mgame-solo.flatpak com.mgame.Solo
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: mgame-solo.flatpak
+          manifest-path: com.mgame.Solo.yml
+          run-tests: false
 
       - name: Upload Flatpak Artifact
         uses: actions/upload-artifact@v4
