@@ -23,7 +23,7 @@ jobs:
 
       - name: Install system dependencies
         run: |
-          sudo apt-get update
+          sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends \
             build-essential \
             libasound2-dev \
@@ -31,18 +31,14 @@ jobs:
             libadwaita-1-dev \
             pkg-config
 
-      - name: Run test suite
-        run: |
-          export PATH="$HOME/.cargo/bin:$PATH"
-          cargo test -- --nocapture
-
-      - name: Build release tarball
+      - name: Build & Test Release Package
         run: |
           export PATH="$HOME/.cargo/bin:$PATH"
           make dist
+          cargo test --release -- --nocapture
 
       - name: Upload Tarball Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: mgame-solo-tarball
           path: |
@@ -58,7 +54,7 @@ jobs:
 
       - name: Install Flatpak & Flatpak Builder
         run: |
-          sudo apt-get update
+          sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends \
             flatpak \
             flatpak-builder \
@@ -74,7 +70,7 @@ jobs:
           flatpak build-bundle repo mgame-solo.flatpak com.mgame.Solo
 
       - name: Upload Flatpak Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: mgame-solo-flatpak
           path: mgame-solo.flatpak
@@ -88,7 +84,7 @@ jobs:
 
       - name: Install build dependencies & Snapcraft
         run: |
-          sudo apt-get update
+          sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends \
             python3-pip \
             cargo \
@@ -104,7 +100,7 @@ jobs:
           snapcraft --destructive-mode
 
       - name: Upload Snap Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: mgame-solo-snap
           path: "*.snap"
