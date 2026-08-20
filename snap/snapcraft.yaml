@@ -23,6 +23,8 @@ parts:
   mgame-solo:
     plugin: rust
     source: .
+    build-snaps:
+      - rustup/latest/stable
     build-packages:
       - libasound2-dev
       - libgtk-4-dev
