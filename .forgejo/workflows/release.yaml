@@ -70,7 +70,7 @@ jobs:
 
       - name: Build Flatpak Bundle
         run: |
-          flatpak-builder --disable-rofiles-fuse --disable-sandbox --user --install-deps-from=flathub --repo=repo --force-clean build-dir com.mgame.Solo.yml
+          flatpak-builder --disable-rofiles-fuse --user --install-deps-from=flathub --repo=repo --force-clean build-dir com.mgame.Solo.yml
           flatpak build-bundle repo mgame-solo.flatpak com.mgame.Solo
 
       - name: Upload Flatpak Artifact
@@ -90,13 +90,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            snapcraft \
+            python3-pip \
             cargo \
             rustc \
             libasound2-dev \
             libgtk-4-dev \
             libadwaita-1-dev \
             pkg-config
+          sudo pip3 install --break-system-packages snapcraft
 
       - name: Build Snap Package
         run: |
