@@ -9,7 +9,7 @@ on:
 jobs:
   tarball:
     name: Build Standalone Tarball
-    runs-on: docker
+    runs-on: codeberg-hosted
     container:
       image: rust:bookworm
     steps:
@@ -42,7 +42,7 @@ jobs:
 
   flatpak:
     name: Build Flatpak Bundle
-    runs-on: docker
+    runs-on: codeberg-hosted
     container:
       image: ghcr.io/flathub-infra/flatpak-builder-lint:latest
       options: --privileged
