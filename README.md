@@ -21,7 +21,7 @@ It provides a modern graphical interface to manage hardware volume faders, audio
 
 ### Method 1: Pre-built Archive (Recommended)
 
-1. Download the latest `mgame-solo-v1.0.0-x86_64-linux.tar.gz` from the [Releases](https://codeberg.org/Vehicoule/mgame-solo-linux/releases) page.
+1. Download the latest `mgame-solo-v1.0.0-x86_64-linux.tar.gz` from the [Releases](https://github.com/Vehicoule/mgame-solo-linux/releases) page.
 2. Extract the archive:
    ```bash
    tar -xzf mgame-solo-v1.0.0-x86_64-linux.tar.gz
@@ -37,7 +37,7 @@ It provides a modern graphical interface to manage hardware volume faders, audio
 
 ### Method 2: Flatpak
 
-Download `mgame-solo.flatpak` from the [Releases](https://codeberg.org/Vehicoule/mgame-solo-linux/releases) page and install it with:
+Download `mgame-solo.flatpak` from the [Releases](https://github.com/Vehicoule/mgame-solo-linux/releases) page and install it with:
 
 ```bash
 flatpak install --user mgame-solo.flatpak
@@ -52,7 +52,7 @@ flatpak-builder --user --install --force-clean build-dir com.mgame.Solo.yml
 
 ### Method 3: Snap
 
-Download the `.snap` package from [Releases](https://codeberg.org/Vehicoule/mgame-solo-linux/releases) and install:
+Download the `.snap` package from [Releases](https://github.com/Vehicoule/mgame-solo-linux/releases) and install:
 
 ```bash
 sudo snap install --classic --dangerous mgame-solo_*.snap
@@ -74,7 +74,7 @@ Make sure the following packages are installed on your distribution:
 #### Compile and Install
 
 ```bash
-git clone https://codeberg.org/Vehicoule/mgame-solo-linux.git
+git clone https://github.com/Vehicoule/mgame-solo-linux.git
 cd mgame-solo-linux
 make install
 ```
