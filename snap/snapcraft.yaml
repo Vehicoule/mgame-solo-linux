@@ -8,7 +8,7 @@ description: |
   synchronization, mic processing DSP, voice effects, and LED theme configuration.
 
 grade: stable
-confinement: classic
+confinement: strict
 
 apps:
   mgame-solo:
@@ -18,10 +18,6 @@ apps:
       - audio-playback
       - audio-record
       - raw-usb
-      - desktop
-      - desktop-legacy
-      - wayland
-      - x11
 
 parts:
   mgame-solo:

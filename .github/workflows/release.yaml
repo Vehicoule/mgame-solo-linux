@@ -66,8 +66,8 @@ jobs:
 
       - name: Build Flatpak Bundle
         run: |
-          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo || true
-          flatpak-builder --repo=repo --force-clean build-dir com.mgame.Solo.yml
+          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak-builder --install-deps-from=flathub --repo=repo --force-clean build-dir com.mgame.Solo.yml
           flatpak build-bundle repo mgame-solo.flatpak com.mgame.Solo
 
       - name: Upload Flatpak Artifact
