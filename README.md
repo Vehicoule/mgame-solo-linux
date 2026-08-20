@@ -21,7 +21,7 @@ It provides a modern graphical interface to manage hardware volume faders, audio
 
 ### Method 1: Pre-built Archive (Recommended)
 
-1. Download the latest `mgame-solo-v1.0.0-x86_64-linux.tar.gz` from the GitHub Releases page.
+1. Download the latest `mgame-solo-v1.0.0-x86_64-linux.tar.gz` from the Codeberg Releases page.
 2. Extract the archive:
    ```bash
    tar -xzf mgame-solo-v1.0.0-x86_64-linux.tar.gz
@@ -37,15 +37,30 @@ It provides a modern graphical interface to manage hardware volume faders, audio
 
 ### Method 2: Flatpak
 
-If you use Flatpak:
+Download `mgame-solo.flatpak` from the Releases page and install it with:
 
+```bash
+flatpak install --user mgame-solo.flatpak
+```
+
+Or build from source manifest:
 ```bash
 flatpak-builder --user --install --force-clean build-dir com.mgame.Solo.yml
 ```
 
 ---
 
-### Method 3: Building from Source
+### Method 3: Snap
+
+Download the `.snap` package from Releases and install:
+
+```bash
+sudo snap install --classic --dangerous mgame-solo_*.snap
+```
+
+---
+
+### Method 4: Building from Source
 
 #### Prerequisites
 
@@ -59,7 +74,7 @@ Make sure the following packages are installed on your distribution:
 #### Compile and Install
 
 ```bash
-git clone https://github.com/your-username/mgame-solo.git
+git clone https://codeberg.org/your-username/mgame-solo.git
 cd mgame-solo
 make install
 ```
