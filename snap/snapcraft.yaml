@@ -1,0 +1,41 @@
+name: mgame-solo
+base: core24
+version: '1.0.0'
+summary: Linux Audio Control Panel for M-Audio M-Game Solo
+description: |
+  Native Linux companion control center and PipeWire routing mixer for the
+  M-Audio M-Game Solo streaming audio interface. Provides real-time fader
+  synchronization, mic processing DSP, voice effects, and LED theme configuration.
+
+grade: stable
+confinement: classic
+
+apps:
+  mgame-solo:
+    command: bin/mgame-solo
+    extensions: [gnome]
+    plugs:
+      - audio-playback
+      - audio-record
+      - raw-usb
+      - desktop
+      - desktop-legacy
+      - wayland
+      - x11
+
+parts:
+  mgame-solo:
+    plugin: rust
+    source: .
+    build-packages:
+      - libasound2-dev
+      - libgtk-4-dev
+      - libadwaita-1-dev
+      - libpipewire-0.3-dev
+      - pkg-config
+    override-build: |
+      cargo build --release
+      install -Dm755 target/release/mgame-solo $CRAFT_PART_INSTALL/bin/mgame-solo
+      install -Dm644 data/com.mgame.Solo.desktop $CRAFT_PART_INSTALL/share/applications/com.mgame.Solo.desktop
+      install -Dm644 data/com.mgame.Solo.svg $CRAFT_PART_INSTALL/share/icons/hicolor/scalable/apps/com.mgame.Solo.svg
+      install -Dm644 data/com.mgame.Solo.metainfo.xml $CRAFT_PART_INSTALL/share/metainfo/com.mgame.Solo.metainfo.xml

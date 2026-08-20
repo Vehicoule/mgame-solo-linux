@@ -1,0 +1,16 @@
+# Build output
+/target
+/dist
+*.tar.gz
+*.sha256
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS artifacts
+.DS_Store
+Thumbs.db

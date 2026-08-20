@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- GNOME Soft Drop Shadow -->
+    <filter id="dial-shadow" x="-20%" y="-20%" width="140%" height="145%">
+      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity="0.55"/>
+    </filter>
+
+    <!-- High Contrast Metallic Outer Bezel -->
+    <linearGradient id="bezel-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5a6275"/>
+      <stop offset="35%" stop-color="#3b4050"/>
+      <stop offset="100%" stop-color="#242834"/>
+    </linearGradient>
+
+    <!-- Dial Face Gradient -->
+    <linearGradient id="dial-face" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2e3342"/>
+      <stop offset="100%" stop-color="#161820"/>
+    </linearGradient>
+
+    <!-- Vibrant Luminous Red Arc -->
+    <linearGradient id="mgame-red" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4d5e"/>
+      <stop offset="100%" stop-color="#e01b24"/>
+    </linearGradient>
+
+    <!-- Top Rim Specular Highlight -->
+    <linearGradient id="specular" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Inactive Volume Ring Track -->
+  <circle cx="64" cy="64" r="48" fill="none" stroke="#2b303d" stroke-width="7"/>
+  <circle cx="64" cy="64" r="48" fill="none" stroke="#161820" stroke-width="1.5" stroke-opacity="0.6"/>
+
+  <!-- Active Vibrant Red Volume Level Arc (270 degrees wrap) -->
+  <circle cx="64" cy="64" r="48" fill="none" stroke="url(#mgame-red)" stroke-width="7"
+          stroke-dasharray="196 260" stroke-linecap="round" transform="rotate(135 64 64)"/>
+
+  <!-- Master Rotary Dial Body with Shadow & High-Contrast Bezel -->
+  <circle cx="64" cy="64" r="38" fill="url(#bezel-metal)" filter="url(#dial-shadow)"/>
+  <circle cx="64" cy="64" r="38" fill="none" stroke="url(#specular)" stroke-width="1.5"/>
+
+  <!-- Inset Knob Face with Specular Ring -->
+  <circle cx="64" cy="64" r="31" fill="url(#dial-face)"/>
+  <circle cx="64" cy="64" r="31" fill="none" stroke="#101116" stroke-width="1.2"/>
+
+  <!-- Luminous Position Indicator Pip (High-Contrast Red + White Center) -->
+  <circle cx="64" cy="42" r="4.5" fill="url(#mgame-red)"/>
+  <circle cx="64" cy="42" r="2" fill="#ffffff"/>
+
+  <!-- Tactile Grip Ring Accent -->
+  <circle cx="64" cy="64" r="21" fill="none" stroke="#414859" stroke-width="1.2" stroke-dasharray="3 3"/>
+</svg>

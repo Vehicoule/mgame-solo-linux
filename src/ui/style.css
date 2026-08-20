@@ -1,0 +1,112 @@
+/* Seamless GNOME HIG Libadwaita Styling */
+
+.sidebar-header-row {
+    background: transparent;
+    padding-top: 14px;
+    padding-bottom: 4px;
+    padding-left: 12px;
+}
+
+.sidebar-heading {
+    font-size: 11.5px;
+    font-weight: 800;
+    color: alpha(@window_fg_color, 0.45);
+}
+
+.sidebar-row {
+    border-radius: 8px;
+    margin-bottom: 2px;
+    transition: background-color 150ms ease;
+}
+
+/* Sidebar Hardware Connection Indicator */
+.status-dot {
+    font-size: 10px;
+    margin-right: 4px;
+}
+
+.status-dot.connected {
+    color: #33d17a;
+}
+
+.status-dot.disconnected {
+    color: #e01b24;
+}
+
+.status-text {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: alpha(@window_fg_color, 0.6);
+}
+
+/* Mixer Console Channel Cards */
+.channel-card {
+    background-color: @card_bg_color;
+    border: 1px solid alpha(@window_fg_color, 0.06);
+    border-radius: 12px;
+    padding: 18px 12px 16px 12px;
+}
+
+/* Clean Native Libadwaita Vertical Slider */
+scale.fader-slider {
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+scale.fader-slider trough {
+    min-width: 6px;
+    min-height: 220px;
+    border-radius: 3px;
+    background-color: alpha(@window_fg_color, 0.12);
+}
+
+scale.fader-slider highlight {
+    border-radius: 3px;
+    background: @accent_bg_color;
+}
+
+scale.fader-slider slider {
+    min-width: 22px;
+    min-height: 22px;
+    border-radius: 11px;
+    background-color: #ffffff;
+    border: 1px solid alpha(black, 0.15);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+    transition: transform 100ms ease;
+}
+
+scale.fader-slider slider:hover {
+    transform: scale(1.15);
+}
+
+scale.fader-slider slider:active {
+    transform: scale(0.95);
+}
+
+/* dB & Percentage Badge */
+.db-badge {
+    font-size: 12px;
+    font-weight: 600;
+    font-feature-settings: "tnum";
+    color: alpha(@window_fg_color, 0.7);
+    padding: 3px 8px;
+    border-radius: 6px;
+    background-color: alpha(@window_fg_color, 0.06);
+}
+
+.db-badge.muted {
+    color: @destructive_bg_color;
+    background-color: alpha(@destructive_bg_color, 0.12);
+    font-weight: 700;
+}
+
+/* Native Libadwaita Mute Button */
+button.channel-mute-btn {
+    min-width: 54px;
+    min-height: 36px;
+    padding: 0;
+}
+
+.success {
+    color: @accent_bg_color;
+}

@@ -1,0 +1,38 @@
+app-id: com.mgame.Solo
+runtime: org.gnome.Platform
+runtime-version: '46'
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: mgame-solo
+
+finish-args:
+  # Wayland and X11 display access
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --share=ipc
+  # PulseAudio & PipeWire audio control access
+  - --socket=pulseaudio
+  # Hardware ALSA RawMIDI & USB access
+  - --device=all
+  # System sound notifications & power/suspend inhibition
+  - --talk-name=org.freedesktop.Notifications
+
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/mgame-solo/cargo
+
+modules:
+  - name: mgame-solo
+    buildsystem: simple
+    build-commands:
+      - cargo --offline fetch --manifest-path Cargo.toml || true
+      - cargo build --release --verbose
+      - install -Dm755 target/release/mgame-solo /app/bin/mgame-solo
+      - install -Dm644 data/com.mgame.Solo.desktop /app/share/applications/com.mgame.Solo.desktop
+      - install -Dm644 data/com.mgame.Solo.svg /app/share/icons/hicolor/scalable/apps/com.mgame.Solo.svg
+      - install -Dm644 data/com.mgame.Solo.metainfo.xml /app/share/metainfo/com.mgame.Solo.metainfo.xml
+    sources:
+      - type: dir
+        path: .

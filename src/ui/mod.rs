@@ -1,0 +1,9 @@
+pub mod app;
+pub mod censor_view;
+pub mod channel_strip;
+pub mod dsp_view;
+pub mod matrix_view;
+pub mod mixer_view;
+pub mod settings_view;
+pub mod voice_fx_view;
+pub mod window;

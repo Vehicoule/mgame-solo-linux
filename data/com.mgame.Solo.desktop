@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=M-Game Solo
+GenericName=Audio Mixer Control Center
+Comment=Companion software and mixer control center for M-Audio M-Game Solo on Linux
+Exec=mgame-solo
+Icon=com.mgame.Solo
+Terminal=false
+Type=Application
+Categories=AudioVideo;Audio;Mixer;GTK;
+StartupNotify=true
+StartupWMClass=com.mgame.Solo
+Keywords=mgame;m-audio;mixer;audio;dsp;pipewire;streaming;
