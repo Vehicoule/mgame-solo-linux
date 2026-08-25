@@ -6,6 +6,12 @@ sdk-extensions:
   - org.freedesktop.Sdk.Extension.rust-stable
 command: mgame-solo
 
+# Skip the AppStream metadata compose stage. It is only needed when
+# hosting the app in an OSTree repository (e.g. publishing to Flathub);
+# for directly-installed .flatpak bundles it adds a fragile dependency
+# on the SDK's appstream/mediaworker tooling.
+appstream-compose: false
+
 finish-args:
   # Wayland and X11 display access
   - --socket=wayland
