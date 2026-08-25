@@ -19,8 +19,14 @@ finish-args:
   - --share=ipc
   # PulseAudio & PipeWire audio control access
   - --socket=pulseaudio
+  # PipeWire socket & config for host provisioning
+  - --filesystem=xdg-run/pipewire:rw
+  - --filesystem=xdg-config/pipewire:create
   # Hardware ALSA RawMIDI & USB access
   - --device=all
+  # Host integration for PipeWire config & service restart
+  - --talk-name=org.freedesktop.Flatpak
+  - --talk-name=org.freedesktop.systemd1
   # System sound notifications
   - --talk-name=org.freedesktop.Notifications
 
