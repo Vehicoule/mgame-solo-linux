@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
@@ -50,7 +50,7 @@ jobs:
         run: make dist ARCH=x86_64
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: tarball
           path: |
@@ -63,7 +63,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+
+      - name: Install flatpak-builder
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends flatpak flatpak-builder elfutils
 
       - name: Generate vendored cargo sources
         run: |
@@ -80,8 +85,17 @@ jobs:
           manifest-path: com.mgame.Solo.yml
           cache-key: flatpak-${{ hashFiles('Cargo.lock') }}
 
+      - name: Print build logs on failure
+        if: failure()
+        run: |
+          find .flatpak-builder -name '*.log' -print 2>/dev/null | while read -r f; do
+            echo "::group::$f"
+            tail -n 150 "$f"
+            echo "::endgroup::"
+          done
+
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: flatpak
           path: mgame-solo.flatpak
@@ -92,14 +106,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Build Snap package
         uses: snapcore/action-build@v1
         id: snapcraft
 
+      - name: Print build logs on failure
+        if: failure()
+        run: |
+          for f in "$HOME"/.local/state/snapcraft/log/*.log; do
+            [ -f "$f" ] || continue
+            echo "::group::$f"
+            tail -n 200 "$f"
+            echo "::endgroup::"
+          done
+
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: snap
           path: ${{ steps.snapcraft.outputs.snap }}
@@ -112,7 +136,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download all artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: artifacts
           merge-multiple: true
