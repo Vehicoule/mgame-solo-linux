@@ -33,6 +33,7 @@ echo "Installing M-Game Solo to $PREFIX ..."
 install -Dm755 "$ROOT/bin/mgame-solo" "$BIN_DIR/mgame-solo"
 install -Dm644 "$ROOT/data/com.mgame.Solo.desktop" "$DATA_DIR/applications/com.mgame.Solo.desktop"
 install -Dm644 "$ROOT/data/com.mgame.Solo.svg" "$DATA_DIR/icons/hicolor/scalable/apps/com.mgame.Solo.svg"
+install -Dm644 "$ROOT/data/com.mgame.Solo-128.png" "$DATA_DIR/icons/hicolor/128x128/apps/com.mgame.Solo.png"
 install -Dm644 "$ROOT/data/com.mgame.Solo.metainfo.xml" "$DATA_DIR/metainfo/com.mgame.Solo.metainfo.xml"
 
 # udev rules grant non-root access to the device; needs write access to /etc

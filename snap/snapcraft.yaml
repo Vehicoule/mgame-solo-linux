@@ -57,5 +57,7 @@ parts:
         "$CRAFT_PART_INSTALL/share/applications/com.mgame.Solo.desktop"
       install -Dm644 data/com.mgame.Solo.svg \
         "$CRAFT_PART_INSTALL/share/icons/hicolor/scalable/apps/com.mgame.Solo.svg"
+      install -Dm644 data/com.mgame.Solo-128.png \
+        "$CRAFT_PART_INSTALL/share/icons/hicolor/128x128/apps/com.mgame.Solo.png"
       install -Dm644 data/com.mgame.Solo.metainfo.xml \
         "$CRAFT_PART_INSTALL/share/metainfo/com.mgame.Solo.metainfo.xml"

@@ -60,6 +60,7 @@ dist: release
 	cp target/release/mgame-solo $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/bin/
 	cp data/com.mgame.Solo.desktop $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/data/
 	cp data/com.mgame.Solo.svg $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/data/
+	cp data/com.mgame.Solo-128.png $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/data/
 	cp data/com.mgame.Solo.metainfo.xml $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/data/
 	cp data/99-mgame-solo.rules $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/data/
 	cp scripts/install.sh $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/install.sh

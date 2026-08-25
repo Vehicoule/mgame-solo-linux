@@ -5,6 +5,7 @@
   <project_license>GPL-3.0-or-later</project_license>
   <name>M-Game Solo</name>
   <summary>Control center and audio mixer for M-Audio M-Game Solo</summary>
+  <icon type="stock">com.mgame.Solo</icon>
   <description>
     <p>
       M-Game Solo Linux Control Suite provides complete hardware mixer control,
@@ -13,6 +14,14 @@
     </p>
   </description>
   <launchable type="desktop-id">com.mgame.Solo.desktop</launchable>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="1.0.0" date="2026-08-25">
+      <description>
+        <p>Initial release.</p>
+      </description>
+    </release>
+  </releases>
   <provides>
     <binary>mgame-solo</binary>
   </provides>

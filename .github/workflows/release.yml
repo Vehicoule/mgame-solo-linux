@@ -96,11 +96,13 @@ jobs:
       - name: Print build logs on failure
         if: failure()
         run: |
-          find .flatpak-builder -name '*.log' -print 2>/dev/null | while read -r f; do
-            echo "::group::$f"
-            tail -n 150 "$f"
-            echo "::endgroup::"
-          done
+          find .flatpak-builder flatpak_app -type f \
+            \( -name '*.log' -o -name '*.yaml' -o -name '*.yml' \) 2>/dev/null |
+            grep -iE 'issue|report|hint|log' | while read -r f; do
+              echo "::group::$f"
+              tail -n 120 "$f" 2>/dev/null || true
+              echo "::endgroup::"
+            done
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
