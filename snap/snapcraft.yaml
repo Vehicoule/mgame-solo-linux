@@ -23,23 +23,31 @@ apps:
 
 parts:
   mgame-solo:
-    plugin: rust
+    plugin: nil
     source: .
     parse-info:
       - share/metainfo/com.mgame.Solo.metainfo.xml
     build-snaps:
       - rustup/latest/stable
     build-packages:
+      - build-essential
+      - pkg-config
       - libgtk-4-dev
       - libadwaita-1-dev
-      - pkg-config
     override-pull: |
       craftctl default
       version="$(sed -n 's/^version = "\(.*\)"/\1/p' "$CRAFT_PART_SRC/Cargo.toml" | head -n1)"
       test -n "$version"
       craftctl set version="$version"
     override-build: |
-      craftctl default
+      set -eu
+      export PATH="/snap/bin:$PATH"
+      export RUSTUP_TOOLCHAIN=stable
+      rustc --version
+      cargo --version
+      cargo build --release --locked
+      install -Dm755 target/release/mgame-solo \
+        "$CRAFT_PART_INSTALL/bin/mgame-solo"
       install -Dm644 data/com.mgame.Solo.desktop \
         "$CRAFT_PART_INSTALL/share/applications/com.mgame.Solo.desktop"
       install -Dm644 data/com.mgame.Solo.svg \
