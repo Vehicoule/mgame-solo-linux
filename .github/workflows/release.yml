@@ -70,6 +70,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends flatpak flatpak-builder elfutils
           sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          # Preinstall everything flatpak-builder would otherwise need to
+          # install itself (it runs unprivileged and cannot deploy to the
+          # system installation without polkit authorization).
+          sudo flatpak install -y --noninteractive flathub \
+            runtime/org.gnome.Platform/x86_64/50 \
+            runtime/org.gnome.Sdk/x86_64/50 \
+            runtime/org.freedesktop.Sdk.Extension.rust-stable/x86_64/25.08
 
       - name: Generate vendored cargo sources
         run: |

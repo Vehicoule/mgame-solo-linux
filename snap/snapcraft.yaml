@@ -41,6 +41,11 @@ parts:
       craftctl set version="$version"
     override-build: |
       set -eu
+      # The gnome extension exports the SDK snap's LD_LIBRARY_PATH, whose
+      # old glibc breaks the rustup snap binaries. We build against the
+      # apt -dev packages instead; runtime libs are still staged by the
+      # extension.
+      unset LD_LIBRARY_PATH
       export PATH="/snap/bin:$PATH"
       export RUSTUP_TOOLCHAIN=stable
       rustc --version
