@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.mgame.Solo</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>M-Game Solo</name>
+  <summary>Control center and audio mixer for M-Audio M-Game Solo</summary>
+  <description>
+    <p>
+      M-Game Solo Linux Control Suite provides complete hardware mixer control,
+      PipeWire virtual channel routing, DSP voice processing, real-time voice transformer effects,
+      and hardware lighting customization for the M-Audio M-Game Solo USB audio interface.
+    </p>
+  </description>
+  <launchable type="desktop-id">com.mgame.Solo.desktop</launchable>
+  <provides>
+    <binary>mgame-solo</binary>
+  </provides>
+</component>

@@ -1,0 +1,48 @@
+name: mgame-solo
+base: core24
+adopt-info: mgame-solo
+summary: Audio mixer control center for M-Audio M-Game Solo
+description: |
+  Companion software and mixer control center for the M-Audio M-Game Solo
+  streaming audio interface. Provides real-time fader synchronization,
+  PipeWire channel routing, mic processing DSP, voice effects and LED
+  theme configuration.
+
+grade: stable
+confinement: strict
+
+apps:
+  mgame-solo:
+    command: bin/mgame-solo
+    extensions: [gnome]
+    plugs:
+      - audio-playback
+      - audio-record
+      - alsa
+      - raw-usb
+
+parts:
+  mgame-solo:
+    plugin: rust
+    source: .
+    parse-info:
+      - share/metainfo/com.mgame.Solo.metainfo.xml
+    build-snaps:
+      - rustup/latest/stable
+    build-packages:
+      - libgtk-4-dev
+      - libadwaita-1-dev
+      - pkg-config
+    override-pull: |
+      craftctl default
+      version="$(sed -n 's/^version = "\(.*\)"/\1/p' "$CRAFT_PART_SRC/Cargo.toml" | head -n1)"
+      test -n "$version"
+      craftctl set version="$version"
+    override-build: |
+      craftctl default
+      install -Dm644 data/com.mgame.Solo.desktop \
+        "$CRAFT_PART_INSTALL/share/applications/com.mgame.Solo.desktop"
+      install -Dm644 data/com.mgame.Solo.svg \
+        "$CRAFT_PART_INSTALL/share/icons/hicolor/scalable/apps/com.mgame.Solo.svg"
+      install -Dm644 data/com.mgame.Solo.metainfo.xml \
+        "$CRAFT_PART_INSTALL/share/metainfo/com.mgame.Solo.metainfo.xml"
