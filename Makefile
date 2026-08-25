@@ -38,7 +38,7 @@ install: release
 	mkdir -p $(BINDIR) $(DESKTOPDIR) $(ICONDIR) $(METAINFODIR)
 	install -m 755 target/release/mgame-solo $(BINDIR)/mgame-solo
 	install -m 644 data/com.mgame.Solo.desktop $(DESKTOPDIR)/com.mgame.Solo.desktop
-	install -m 644 data/com.mgame.Solo.svg $(ICONDIR)/com.mgame.Solo.svg
+	install -m 644 data/com.mgame.Solo-128.png $(ICONDIR)/com.mgame.Solo.png
 	install -m 644 data/com.mgame.Solo.metainfo.xml $(METAINFODIR)/com.mgame.Solo.metainfo.xml
 	update-desktop-database $(DESKTOPDIR) 2>/dev/null || true
 	gtk-update-icon-cache -f -t $(PREFIX)/share/icons/hicolor 2>/dev/null || true
@@ -47,7 +47,7 @@ install: release
 uninstall:
 	rm -f $(BINDIR)/mgame-solo
 	rm -f $(DESKTOPDIR)/com.mgame.Solo.desktop
-	rm -f $(ICONDIR)/com.mgame.Solo.svg
+	rm -f $(ICONDIR)/com.mgame.Solo.png
 	rm -f $(METAINFODIR)/com.mgame.Solo.metainfo.xml
 	update-desktop-database $(DESKTOPDIR) 2>/dev/null || true
 	@echo "Uninstalled M-Game Solo."
@@ -59,7 +59,6 @@ dist: release
 	mkdir -p $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/data
 	cp target/release/mgame-solo $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/bin/
 	cp data/com.mgame.Solo.desktop $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/data/
-	cp data/com.mgame.Solo.svg $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/data/
 	cp data/com.mgame.Solo-128.png $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/data/
 	cp data/com.mgame.Solo.metainfo.xml $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/data/
 	cp data/99-mgame-solo.rules $(DIST_DIR)/mgame-solo-v$(VERSION)-$(ARCH)-linux/data/

@@ -20,7 +20,6 @@ fi
 echo "Removing M-Game Solo from $PREFIX ..."
 rm -f "$PREFIX/bin/mgame-solo"
 rm -f "$PREFIX/share/applications/com.mgame.Solo.desktop"
-rm -f "$PREFIX/share/icons/hicolor/scalable/apps/com.mgame.Solo.svg"
 rm -f "$PREFIX/share/icons/hicolor/128x128/apps/com.mgame.Solo.png"
 rm -f "$PREFIX/share/metainfo/com.mgame.Solo.metainfo.xml"
 

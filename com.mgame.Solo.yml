@@ -38,7 +38,8 @@ modules:
       - cargo build --offline --release --verbose
       - install -Dm755 target/release/mgame-solo /app/bin/mgame-solo
       - install -Dm644 data/com.mgame.Solo.desktop /app/share/applications/com.mgame.Solo.desktop
-      - install -Dm644 data/com.mgame.Solo.svg /app/share/icons/hicolor/scalable/apps/com.mgame.Solo.svg
+      # Raster icon only: modern librsvg no longer provides a gdk-pixbuf
+      # SVG loader, so the sandbox cannot validate .svg icons at export.
       - install -Dm644 data/com.mgame.Solo-128.png /app/share/icons/hicolor/128x128/apps/com.mgame.Solo.png
       - install -Dm644 data/com.mgame.Solo.metainfo.xml /app/share/metainfo/com.mgame.Solo.metainfo.xml
     sources:
