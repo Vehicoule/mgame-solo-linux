@@ -28,7 +28,7 @@ context.modules = [
             }
         }
     }
-    # 2. M-Game Solo (Chat Out) -> Channels 3-4
+    # 2. M-Game Solo (Chat Out) -> Channels 5-6
     {   name = libpipewire-module-loopback
         args = {
             node.description = "M-Game Solo (Chat Out)"
@@ -40,14 +40,14 @@ context.modules = [
             }
             playback.props = {
                 node.target = "alsa_output.usb-M-Audio_M-Game_Solo-01.analog-surround-71"
-                audio.position = [ RL RR ]
+                audio.position = [ FC LFE ]
                 channelmix.disable = true
                 stream.dont-remix = true
                 node.passive = true
             }
         }
     }
-    # 3. M-Game Solo (Sampler Out) -> Channels 5-6
+    # 3. M-Game Solo (Sampler Out) -> Channels 3-4
     {   name = libpipewire-module-loopback
         args = {
             node.description = "M-Game Solo (Sampler Out)"
@@ -59,7 +59,7 @@ context.modules = [
             }
             playback.props = {
                 node.target = "alsa_output.usb-M-Audio_M-Game_Solo-01.analog-surround-71"
-                audio.position = [ FC LFE ]
+                audio.position = [ RL RR ]
                 channelmix.disable = true
                 stream.dont-remix = true
                 node.passive = true
@@ -105,13 +105,13 @@ context.modules = [
             }
         }
     }
-    # 6. M-Game Solo (Chat Mic) <- Channels 3-4 (Master Default Input)
+    # 6. M-Game Solo (Chat Mic) <- Channels 5-6 (Master Default Input)
     {   name = libpipewire-module-loopback
         args = {
             node.description = "M-Game Solo (Chat Mic)"
             capture.props = {
                 node.target = "alsa_input.usb-M-Audio_M-Game_Solo-01.analog-surround-71"
-                audio.position = [ RL RR ]
+                audio.position = [ FC LFE ]
                 channelmix.disable = true
                 stream.dont-remix = true
                 node.passive = true
@@ -125,13 +125,13 @@ context.modules = [
             }
         }
     }
-    # 7. M-Game Solo (Sampler In) <- Channels 5-6
+    # 7. M-Game Solo (Sampler In) <- Channels 3-4
     {   name = libpipewire-module-loopback
         args = {
             node.description = "M-Game Solo (Sampler In)"
             capture.props = {
                 node.target = "alsa_input.usb-M-Audio_M-Game_Solo-01.analog-surround-71"
-                audio.position = [ FC LFE ]
+                audio.position = [ RL RR ]
                 channelmix.disable = true
                 stream.dont-remix = true
                 node.passive = true
@@ -355,6 +355,29 @@ pub fn ensure_pipewire_configuration() -> Result<(), Box<dyn std::error::Error>>
         .args(["set-default-source", "mgame_chat_source"])
         .status();
 
+    Ok(())
+}
+
+pub fn remove_pipewire_configuration() -> Result<(), Box<dyn std::error::Error>> {
+    // Sandboxed/native path
+    if let Some(p) = get_pipewire_config_path() {
+        let _ = fs::remove_file(&p);
+        info!("Removed PipeWire config at {:?}", p);
+    }
+    // Host path when sandboxed
+    if let Some(host) = get_host_pipewire_config_path() {
+        let sandboxed = get_pipewire_config_path();
+        if Some(&host) != sandboxed.as_ref() {
+            let _ = fs::remove_file(&host);
+            if is_flatpak() {
+                let _ = Command::new("flatpak-spawn")
+                    .args(["--host", "rm", "-f", &host.to_string_lossy().to_string()])
+                    .status();
+            }
+            info!("Removed host PipeWire config at {:?}", host);
+        }
+    }
+    restart_pipewire_services();
     Ok(())
 }
 

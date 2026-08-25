@@ -28,6 +28,26 @@ if [[ "$(id -u)" -eq 0 && -f /etc/udev/rules.d/99-mgame-solo.rules ]]; then
     udevadm control --reload-rules 2>/dev/null || true
 fi
 
+# Remove PipeWire virtual devices provisioned by the app
+echo "Removing PipeWire virtual devices..."
+rm -f "$HOME/.config/pipewire/pipewire.conf.d/50-m-game-solo.conf" 2>/dev/null || true
+rm -f "$HOME/.var/app/com.mgame.Solo/config/pipewire/pipewire.conf.d/50-m-game-solo.conf" 2>/dev/null || true
+if [ -n "${SNAP_REAL_HOME:-}" ]; then
+    rm -f "$SNAP_REAL_HOME/.config/pipewire/pipewire.conf.d/50-m-game-solo.conf" 2>/dev/null || true
+fi
+if command -v flatpak-spawn >/dev/null 2>&1; then
+    flatpak-spawn --host rm -f "$HOME/.config/pipewire/pipewire.conf.d/50-m-game-solo.conf" 2>/dev/null || true
+fi
+# Restart PipeWire to apply removal (best-effort)
+if command -v systemctl >/dev/null 2>&1; then
+    systemctl --user restart pipewire.service wireplumber.service 2>/dev/null || true
+    if command -v flatpak-spawn >/dev/null 2>&1; then
+        flatpak-spawn --host systemctl --user restart pipewire.service wireplumber.service 2>/dev/null || true
+    fi
+else
+    echo "Please restart PipeWire manually: systemctl --user restart pipewire wireplumber"
+fi
+
 command -v update-desktop-database >/dev/null 2>&1 && \
     update-desktop-database "$PREFIX/share/applications" 2>/dev/null || true
 

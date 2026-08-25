@@ -9,6 +9,15 @@ use ui::app::MGameApp;
 
 fn main() -> glib::ExitCode {
     env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
+
+    // Allow `mgame-solo --remove-pipewire-config` to clean up virtual devices on uninstall
+    let args: Vec<String> = std::env::args().collect();
+    if args.iter().any(|a| a == "--remove-pipewire-config" || a == "--uninstall") {
+        log::info!("Removing PipeWire virtual devices...");
+        let _ = crate::audio::pipewire::remove_pipewire_configuration();
+        return glib::ExitCode::SUCCESS;
+    }
+
     log::info!("Starting M-Audio M-Game Solo Linux Control Suite...");
     
     let app = MGameApp::new();
